@@ -9,7 +9,6 @@ iterations=1
 repo="-"
 add_day=false
 dry_run=false
-branch_name="add-contribution"
 
 # Parse the command-line arguments
 while getopts ':m:i:ndr:b:' opt; do
@@ -28,9 +27,6 @@ while getopts ':m:i:ndr:b:' opt; do
             ;;
         r)
             repo="$OPTARG"
-            ;;
-        b)
-            branch_name="$OPTARG"
             ;;
         \?)
             echo "Invalid option: -$OPTARG" >&2
@@ -56,9 +52,9 @@ fi
 
 # Checkout to new branch
 if [[ "$dry_run" = true ]]; then
-    echo "git checkout -b automated/$branch_name"
+    echo "git checkout -b automated/add-contribution"
 else
-    git checkout -b automated/$branch_name
+    git checkout automated/add-contribution
 fi
 
 # Loop through the iterations
@@ -73,3 +69,10 @@ for (( i=1; i<=$iterations; i++ )); do
         git commit -m "Auto commit in $repo: $message"
     fi
 done
+
+# Checkout to new branch
+if [[ "$dry_run" = true ]]; then
+    echo "git checkout main"
+else
+    git checkout main
+fi
