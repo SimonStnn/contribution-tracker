@@ -11,7 +11,7 @@ add_day=false
 dry_run=false
 
 # Parse the command-line arguments
-while getopts ':m:i:adr:' opt; do
+while getopts ':m:i:ndr:' opt; do
     case $opt in
         m)
             message="$OPTARG"
@@ -19,7 +19,7 @@ while getopts ':m:i:adr:' opt; do
         i)
             iterations="$OPTARG"
             ;;
-        a)
+        n)
             add_day=true
             ;;
         d)
