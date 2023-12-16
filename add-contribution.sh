@@ -73,12 +73,3 @@ for (( i=1; i<=$iterations; i++ )); do
         git commit -m "Auto commit in $repo: $message"
     fi
 done
-
-# Merge branch to main
-if [[ "$dry_run" = true ]]; then
-    echo "git checkout main"
-    echo "git merge automated/$branch_name"
-else
-    git checkout main
-    git merge automated/$branch_name
-fi
