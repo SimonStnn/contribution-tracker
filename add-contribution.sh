@@ -50,15 +50,32 @@ if [[ "$add_day" = true ]]; then
     fi
 fi
 
+# Checkout to new branch
+if [[ "$dry_run" = true ]]; then
+    echo "git checkout -b automated/add-contribution"
+else
+    git checkout -b automated/add-contribution
+fi
+
 # Loop through the iterations
 for (( i=1; i<=$iterations; i++ )); do
     if [[ "$dry_run" = true ]]; then
         format_message "$message" "$repo"
         echo "git add contributions.md"
-        echo "git commit -m \"$message\""
+        echo "git commit -m \"Auto commit in $repo: \"$message\"\""
     else
         format_message "$message" "$repo" >> contributions.md
         git add contributions.md
-        git commit -m "$message"
+        git commit -m "Auto commit in $repo: $message"
     fi
 done
+
+# merge branch to main
+# Checkout to new branch
+if [[ "$dry_run" = true ]]; then
+    echo "git checkout main"
+    echo "git merge automated/add-contribution"
+else
+    git checkout main
+    git merge automated/add-contribution
+fi
