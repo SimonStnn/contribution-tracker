@@ -9,9 +9,10 @@ iterations=1
 repo="-"
 add_day=false
 dry_run=false
+branch_name="add-contribution"
 
 # Parse the command-line arguments
-while getopts ':m:i:ndr:' opt; do
+while getopts ':m:i:ndr:b:' opt; do
     case $opt in
         m)
             message="$OPTARG"
@@ -27,6 +28,9 @@ while getopts ':m:i:ndr:' opt; do
             ;;
         r)
             repo="$OPTARG"
+            ;;
+        b)
+            branch_name="$OPTARG"
             ;;
         \?)
             echo "Invalid option: -$OPTARG" >&2
@@ -52,9 +56,9 @@ fi
 
 # Checkout to new branch
 if [[ "$dry_run" = true ]]; then
-    echo "git checkout -b automated/add-contribution"
+    echo "git checkout -b automated/$branch_name"
 else
-    git checkout -b automated/add-contribution
+    git checkout -b automated/$branch_name
 fi
 
 # Loop through the iterations
@@ -70,12 +74,11 @@ for (( i=1; i<=$iterations; i++ )); do
     fi
 done
 
-# merge branch to main
-# Checkout to new branch
+# Merge branch to main
 if [[ "$dry_run" = true ]]; then
     echo "git checkout main"
-    echo "git merge automated/add-contribution"
+    echo "git merge automated/$branch_name"
 else
     git checkout main
-    git merge automated/add-contribution
+    git merge automated/$branch_name
 fi
