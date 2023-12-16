@@ -39,17 +39,21 @@ fi
 
 # Check if add_day is set
 if [[ "$add_day" = true ]]; then
-    new_day >> contributions.md
+    if [[ "$dry_run" = true ]]; then
+        new_day
+    else
+        new_day >> contributions.md
+    fi
 fi
 
 # Loop through the iterations
 for (( i=1; i<=$iterations; i++ )); do
-    format_message "$message" >> contributions.md
-
     if [[ "$dry_run" = true ]]; then
+        format_message "$message"
         echo "git add contributions.md"
         echo "git commit -m \"$message\""
     else
+        format_message "$message" >> contributions.md
         git add contributions.md
         git commit -m "$message"
     fi
