@@ -13,11 +13,13 @@ You can view my contributions [here](./contributions.md).
 You can automatically add contributions to this repository by using the following command:
 
 ```bash
-./add-contribution.sh <-m <commit message>> [-i <iteration>] [-a] [-d]
+./add-contribution.sh <-m <commit message>> [-r <repo>] [-i <iteration>] [-a] [-d]
 ```
 
 - `-m`: The commit message to use when committing the changes to this repository.
   - `<commit message>` (string): The commit message to use for the commit. This is also the message that will be used in [contributions.md](./contributions.md).
+- `-r`: The repository you contributed to.
+  - `<repo>` (string)(default = "-"): The name of the repository.
 - `-i`: How many times to iterate over the script. This is useful if you want to add multiple contributions at once.
   - `<iteration>` (number)(default = 1): The number of times to iterate over the script.
 - `-a`: Automatically add the current day to [contributions.md](./contributions.md). (Used the first time of the day)
