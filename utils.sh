@@ -1,12 +1,13 @@
 function format_message(){
     local message="$1"
+    local repo="$2"
     local date=$(date +"%Y-%m-%d %H:%M:%S")
-    echo "| $message | $date |"
+    echo "| $repo | $message | $date |"
 }
 
 function default_table {
-    echo "| Message | Date |"
-    echo "| ------- | ---- |"
+    echo "| Repo | Message | Date |"
+    echo "| ---- | ------- | ---- |"
 }
 
 function new_day(){

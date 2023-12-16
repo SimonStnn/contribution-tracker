@@ -6,11 +6,12 @@ source ./utils.sh
 # Default values
 message=""
 iterations=1
+repo="-"
 add_day=false
 dry_run=false
 
 # Parse the command-line arguments
-while getopts ':m:i:ad' opt; do
+while getopts ':m:i:adr:' opt; do
     case $opt in
         m)
             message="$OPTARG"
@@ -23,6 +24,9 @@ while getopts ':m:i:ad' opt; do
             ;;
         d)
             dry_run=true
+            ;;
+        r)
+            repo="$OPTARG"
             ;;
         \?)
             echo "Invalid option: -$OPTARG" >&2
@@ -49,11 +53,11 @@ fi
 # Loop through the iterations
 for (( i=1; i<=$iterations; i++ )); do
     if [[ "$dry_run" = true ]]; then
-        format_message "$message"
+        format_message "$message" "$repo"
         echo "git add contributions.md"
         echo "git commit -m \"$message\""
     else
-        format_message "$message" >> contributions.md
+        format_message "$message" "$repo" >> contributions.md
         git add contributions.md
         git commit -m "$message"
     fi
