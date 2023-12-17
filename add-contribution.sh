@@ -9,6 +9,7 @@ iterations=1
 repo="-"
 add_day=false
 dry_run=false
+branch="automated/add-contribution"
 
 # Parse the command-line arguments
 while getopts ':m:i:ndr:' opt; do
@@ -52,9 +53,9 @@ fi
 
 # Checkout to new branch
 if [[ "$dry_run" = true ]]; then
-    echo "$ git checkout -b automated/add-contribution"
+    echo "$ git checkout -b $branch"
 else
-    git checkout automated/add-contribution
+    git checkout -b $branch
 fi
 
 # Loop through the iterations
@@ -73,6 +74,10 @@ done
 # Checkout to new branch
 if [[ "$dry_run" = true ]]; then
     echo "$ git checkout main"
+    echo "$ git merge $branch --no-ff --no-edit"
+    echo "$ git branch -D $branch"
 else
     git checkout main
+    git merge $branch --no-ff --no-edit
+    git branch -D $branch
 fi
