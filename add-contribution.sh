@@ -11,7 +11,7 @@ add_day=false
 dry_run=false
 
 # Parse the command-line arguments
-while getopts ':m:i:ndr:b:' opt; do
+while getopts ':m:i:ndr:' opt; do
     case $opt in
         m)
             message="$OPTARG"
@@ -52,7 +52,7 @@ fi
 
 # Checkout to new branch
 if [[ "$dry_run" = true ]]; then
-    echo "git checkout -b automated/add-contribution"
+    echo "$ git checkout -b automated/add-contribution"
 else
     git checkout automated/add-contribution
 fi
@@ -61,8 +61,8 @@ fi
 for (( i=1; i<=$iterations; i++ )); do
     if [[ "$dry_run" = true ]]; then
         format_message "$message" "$repo"
-        echo "git add contributions.md"
-        echo "git commit -m \"Auto commit in $repo: \"$message\"\""
+        echo "$ git add contributions.md"
+        echo "$ git commit -m \"Auto commit in $repo: $message\""
     else
         format_message "$message" "$repo" >> contributions.md
         git add contributions.md
@@ -72,7 +72,7 @@ done
 
 # Checkout to new branch
 if [[ "$dry_run" = true ]]; then
-    echo "git checkout main"
+    echo "$ git checkout main"
 else
     git checkout main
 fi
