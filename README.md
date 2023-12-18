@@ -16,13 +16,13 @@ You can automatically add contributions to this repository by using the followin
 ./add-contribution.sh <-m <commit message>> [-r <repo>] [-i <iteration>] [-n] [-d]
 ```
 
-- `-m`: The commit message to use when committing the changes to this repository.
-  - `<commit message>` (string): The commit message to use for the commit. This is also the message that will be used in [contributions.md](./contributions.md).
-- `-r`: The repository you contributed to.
-  - `<repo>` (string)(default = "-"): The name of the repository.
-- `-i`: How many times to iterate over the script. This is useful if you want to add multiple contributions at once.
-  - `<iteration>` (number)(default = 1): The number of times to iterate over the script.
-- `-n`: Automatically add the current day to [contributions.md](./contributions.md). (Used the first time of the day)
-- `-d`: Is used for a '*dry run*'. This will not commit any changes to this repository.
+| Option | Required? | Type | Default value | Description |
+| ------ |:---------:|:----:|:-------------:|:----------- |
+| -m     | ✔️       | string |     | The commit message to use when committing the changes to this repository. |
+| -r     | ❌       | string | `-` | The name of the repo you contributed to. |
+| -i     | ❌       | number | 1   | How many times to iterate over the script. This is useful if you want to add multiple contributions at once. |
+| -n     | ❌       | bool   | false | Add a new day to your contributions. |
+| -d     | ❌       | bool   | false | Do a "dry-run". Don't make changes or commits, just log it to console. Can be used for debug purposes. |
+
 
 Using this script will help you add your contributions quickly and easily.
