@@ -1,4 +1,4 @@
-function format_message(){
+function format_message() {
     local message="$1"
     local repo="$2"
     echo "| $repo | $message |"
@@ -9,7 +9,7 @@ function default_table {
     echo "| ---- | -------"
 }
 
-function new_day(){
+function new_day() {
     local date=$(date +"%d/%m/%Y")
     echo ""
     echo "## $date"
